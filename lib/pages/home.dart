@@ -14,8 +14,18 @@ class _HomeState extends State<Home> {
     data = ModalRoute.of(context).settings.arguments;
     print(data);
 
+    // set background image
+    String bgImage = data['isDayTime'] ? 'daytime.jpg' : 'nighttime.jpg';
+    Color bgColor = data['isDayTime'] ? Colors.black : Colors.white;
+
     return Scaffold(
-      body: SafeArea(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/$bgImage'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 120.0, 0, 0),
           child: Column(
@@ -24,8 +34,17 @@ class _HomeState extends State<Home> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/location');
                 },
-                icon: Icon(Icons.edit_location),
-                label: Text('Edit Location'),
+                icon: Icon(
+                  Icons.edit_location,
+                  color: bgColor,
+                ),
+                label: Text(
+                  'Change Location',
+                  style: TextStyle(
+                    color: bgColor,
+                    fontSize: 14.0,
+                  ),
+                ),
               ),
               SizedBox(height: 20.0),
               Row(
@@ -36,6 +55,7 @@ class _HomeState extends State<Home> {
                     style: TextStyle(
                       fontSize: 28.0,
                       letterSpacing: 2.0,
+                      color: bgColor,
                     ),
                   ),
                 ],
@@ -46,6 +66,7 @@ class _HomeState extends State<Home> {
                 style: TextStyle(
                   fontSize: 66.0,
                   letterSpacing: 2.0,
+                  color: bgColor,
                 ),
               ),
             ],
